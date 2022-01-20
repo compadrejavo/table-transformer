@@ -251,14 +251,16 @@ def train(args, model, criterion, postprocessors, device):
     # Paths
     run_date = datetime.now().strftime("%Y%m%d%H%M%S")
     #output_directory = os.path.join(args.data_root_dir, "output", run_date)
-    output_directory = os.path.join("content", "drive","MyDrive","Data20","PubTables", "output", run_date)
+    output_directory = "/content/drive/MyDrive/Data20/PubTables/output/"
     if args.model_load_path:
         output_directory = os.path.split(args.model_load_path)[0]
     print("Output directory: ", output_directory)
-    model_save_path = os.path.join(output_directory, 'model.pth')
+    best_path = str(self.checkpoint_dir / 'model_best.pth')
+    model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"
 
     if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+        output_directory = "/content/drive/My Drive/Data20/PubTables/output/"
+        model_save_path = "/content/drive/My Drive/Data20/PubTables/output/models/"
 
     print("loading data")
     dataloading_time = datetime.now()
@@ -336,7 +338,8 @@ def train(args, model, criterion, postprocessors, device):
                     'model_state_dict': model.state_dict(),
                     'optimizer_state_dict': optimizer.state_dict(),
                     }, model_save_path)
-        model_save_path_epoch = os.path.join(output_directory, 'model_' + str(epoch+1) + '.pth')
+        model_save_path_epoch = str(output_directory / 'model_{}.pth'.format(epoch+1))
+        #model_save_path_epoch = os.path.join(output_directory, 'model_' + str(epoch+1) + '.pth')
         torch.save(model.state_dict(), model_save_path_epoch)
 
     print('Total training time: ', datetime.now() - start_time)
