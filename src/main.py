@@ -255,7 +255,7 @@ def train(args, model, criterion, postprocessors, device):
     if args.model_load_path:
         output_directory = os.path.split(args.model_load_path)[0]
     print("Output directory: ", output_directory)
-    best_path = str(self.checkpoint_dir / 'model_best.pth')
+    #best_path = str(self.checkpoint_dir / 'model_best.pth')
     model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"
 
     if not os.path.exists(output_directory):
