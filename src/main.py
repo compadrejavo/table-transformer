@@ -261,6 +261,13 @@ def train(args, model, criterion, postprocessors, device):
     if not os.path.exists(output_directory):
         output_directory = "/content/drive/My Drive/Data20/PubTables/output/"
         model_save_path = "/content/drive/My Drive/Data20/PubTables/output/models/"
+        print("Output directory: ", output_directory)
+    if not os.path.exists(output_directory):
+        output_directory = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/"
+        model_save_path = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/model/"
+        print("Output directory: ", output_directory)
+    if not os.path.exists(output_directory):
+        print("---------------GG----------------------")
 
     print("loading data")
     dataloading_time = datetime.now()
