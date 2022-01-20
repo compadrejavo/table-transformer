@@ -1,6 +1,7 @@
 """
 Copyright (C) 2021 Microsoft Corporation
 """
+import wandb
 import os
 import argparse
 from datetime import datetime
@@ -249,7 +250,8 @@ def train(args, model, criterion, postprocessors, device):
     """
     # Paths
     run_date = datetime.now().strftime("%Y%m%d%H%M%S")
-    output_directory = os.path.join(args.data_root_dir, "output", run_date)
+    #output_directory = os.path.join(args.data_root_dir, "output", run_date)
+    output_directory = os.path.join("content", "drive","MyDrive","Data20","PubTables", "output", run_date)
     if args.model_load_path:
         output_directory = os.path.split(args.model_load_path)[0]
     print("Output directory: ", output_directory)
@@ -327,6 +329,8 @@ def train(args, model, criterion, postprocessors, device):
                      pubmed_stats['coco_eval_bbox'][2],
                      pubmed_stats['coco_eval_bbox'][0],
                      pubmed_stats['coco_eval_bbox'][8]))
+                     
+        wandb.log({"AP50": pubmed_stats['coco_eval_bbox'][1], "AP75": pubmed_stats['coco_eval_bbox'][2], "AP": pubmed_stats['coco_eval_bbox'][0], "AR": pubmed_stats['coco_eval_bbox'][8]})
 
         torch.save({'epoch': epoch,
                     'model_state_dict': model.state_dict(),
@@ -339,6 +343,10 @@ def train(args, model, criterion, postprocessors, device):
 
 
 def main():
+    
+    wandb.init(project="pubtables", entity="javier")
+    wandb.config = Args
+    
     cmd_args = get_args().__dict__
     args = Args
     for key in cmd_args:
@@ -359,6 +367,7 @@ def main():
 
     if args.mode == "train":
         train(args, model, criterion, postprocessors, device)
+        wandb.watch(model, log="all")
     elif args.mode == "eval":
         eval(args, model, criterion, postprocessors, device)
     elif args.mode == "grits":
