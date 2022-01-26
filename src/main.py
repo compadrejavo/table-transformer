@@ -344,8 +344,8 @@ def train(args, model, criterion, postprocessors, device):
         torch.save({'epoch': epoch,
                     'model_state_dict': model.state_dict(),
                     'optimizer_state_dict': optimizer.state_dict(),
-                    }, str(model_save_path + 'model_best.pth') )
-        model_save_path_epoch = str(output_directory + 'model_{}.pth'.format(epoch+1))
+                    }, str(model_save_path + 'model.pth') )
+        model_save_path_epoch = str(model_save_path + 'model_{}.pth'.format(epoch+1))
         #model_save_path_epoch = os.path.join(output_directory, 'model_' + str(epoch+1) + '.pth')
         torch.save(model.state_dict(), model_save_path_epoch)
 
