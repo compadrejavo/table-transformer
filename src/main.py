@@ -257,16 +257,20 @@ def train(args, model, criterion, postprocessors, device):
     print("Output directory: ", output_directory)
     #best_path = str(self.checkpoint_dir / 'model_best.pth')
     model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"+run_date+"/"
-
-    if not os.path.exists(output_directory):
+    
+    if not os.path.exists(model_save_path ):
+        model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"+run_date+"/"
+        os.mkdir(model_save_path)
+        print("Output save directory: ", model_save_path )
+    if not os.path.exists(model_save_path ):
         output_directory = "/content/drive/My Drive/Data20/PubTables/output/"
         model_save_path = "/content/drive/My Drive/Data20/PubTables/output/models/"+run_date+"/"
-        print("Output directory: ", output_directory)
-    if not os.path.exists(output_directory):
+        print("Output save directory: ", model_save_path )
+    if not os.path.exists(model_save_path ):
         output_directory = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/"
         model_save_path = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/model/"+run_date+"/"
-        print("Output directory: ", output_directory)
-    if not os.path.exists(output_directory):
+        print("Output save directory: ", model_save_path )
+    if not os.path.exists(model_save_path ):
         print("---------------GG----------------------")
 
     print("loading data")
