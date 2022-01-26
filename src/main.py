@@ -256,15 +256,15 @@ def train(args, model, criterion, postprocessors, device):
         output_directory = os.path.split(args.model_load_path)[0]
     print("Output directory: ", output_directory)
     #best_path = str(self.checkpoint_dir / 'model_best.pth')
-    model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"
+    model_save_path = "/content/drive/MyDrive/Data20/PubTables/output/models/"+run_date+"/"
 
     if not os.path.exists(output_directory):
         output_directory = "/content/drive/My Drive/Data20/PubTables/output/"
-        model_save_path = "/content/drive/My Drive/Data20/PubTables/output/models/"
+        model_save_path = "/content/drive/My Drive/Data20/PubTables/output/models/"+run_date+"/"
         print("Output directory: ", output_directory)
     if not os.path.exists(output_directory):
         output_directory = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/"
-        model_save_path = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/model/"
+        model_save_path = "/content/table-transformer/PubTables1M-Structure-PASCAL-VOC/output/model/"+run_date+"/"
         print("Output directory: ", output_directory)
     if not os.path.exists(output_directory):
         print("---------------GG----------------------")
